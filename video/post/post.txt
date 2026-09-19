@@ -1,0 +1,18 @@
+JEV just rebuilt the internal link map of our whole site in 5.9 seconds 🤯
+
+566 pages. 8,460 yes/no link decisions. 679 links placed, every one on words the page already had. Total cost: $0.27.
+
+Claude Opus 5, same queue, same rubric, same clock: 0 pages finished when Jev was done. 8 pages by second 16. The full Opus pass would run ~$67, about 240x more per page.
+
+Borja showed the idea yesterday, so we built it on our own site and open sourced it.
+
+What made it work: Jev is literal, so the question you ask it is the product. We put Opus 5 behind it as System 2. It referees 24 pages, reads where the two disagreed and rewrites Jev's rubric. Two rewrites took Jev from finding 45% of Opus's links to 65%, and anchor agreement from 71% to 88%. One-time cost: $15.
+
+An editor pass kept 287 of the links and they are live on our site right now.
+
+Run it with Jev alone, or with Claude or Codex behind it as System 2. One command, MIT, built on @typesafeai's Jev.
+
+Which page of your site would you test it on?
+
+Repo in the reply.
+https://x.com/borjafat/status/2101018783976722479

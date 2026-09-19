@@ -6,7 +6,7 @@ Inspired by [borja's post](https://x.com/borjafat/status/2101018783976722479): i
 
 [![The report](docs/report.png)](https://stas4000.github.io/jev-linkmap/)
 
-Live report: https://stas4000.github.io/jev-linkmap/
+Live report: https://stas4000.github.io/jev-linkmap/ · The race as a 22 second film: [video/jev-linkmap-race.mp4](video/jev-linkmap-race.mp4), built frame by frame from the real timings (`video/spec.cjs`).
 
 ## The run in this repo
 
