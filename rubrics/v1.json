@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "author": "human",
+  "link_instructions": "Would a reader of the SOURCE page be genuinely helped by a contextual link to this TARGET page? Yes only when the source copy really discusses the specific subject the target page is about, so the target deepens something the reader is already reading. No when the two pages merely share an industry, a tool name or a generic word, when the target is about a different product, integration or audience, or when the link would exist only for SEO.",
+  "anchor_instructions": "Which of these phrases, each one already written in the source copy, is an honest anchor for a link to this TARGET page? An honest anchor names the target's subject, and the sentence around it is talking about that subject. Pick none when every phrase is generic, names a different subject than the target, or sits in a sentence about something else.",
+  "link_threshold": 0.7,
+  "anchor_confidence": 0.5,
+  "max_links_per_page": 3,
+  "examples": []
+}

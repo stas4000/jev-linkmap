@@ -1,0 +1,60 @@
+{
+ "mode": "block",
+ "rubric": 2,
+ "seed": 1,
+ "index": 9,
+ "pages": [
+  "https://www.bles-software.com/blog/how-ai-startups-are-disrupting-coding-and-redefining-ai-app-development-in-2025/",
+  "https://www.bles-software.com/use-cases/ai-powered-vocal-extractor-%E2%80%93-one-click-sound-extraction-with-ai-music-technology/",
+  "https://www.bles-software.com/tools/high-intent-lead-flow-router/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-hubspot-salesforce-inclusion-lists-deduplication-and-sync-controls/",
+  "https://www.bles-software.com/blog/2025-web-development-trends-unleashing-innovative-shifts-for-app-developer-company-success/",
+  "https://www.bles-software.com/revops-playbooks/lifecycle-stages-and-funnel-governance-in-hubspot-salesforce-aligning-mqls-sals-and-sqls/",
+  "https://www.bles-software.com/use-cases/custom-gpt-4-model-development-and-deployment/",
+  "https://www.bles-software.com/llm-production-playbooks/shipping-retrieval-augmented-generation-into-production-data-pipelines-indexing-strategies-and-rigorous-evaluation/",
+  "https://www.bles-software.com/migration-playbooks/asana-to-monday-migration-playbook-board-mapping-automations-and-change-enablement-at-scale/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-bi-directional-sync-rules-deduplication-and-ownership-strategy/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-hubspot-salesforce-person-accounts-integration-without-the-pitfalls/",
+  "https://www.bles-software.com/revops-playbooks/data-mapping-checklist-leads-contacts-opportunities-or-bles-software/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-lead-routing-duplicates-and-mql-sql-handoffs-across-hubspot-and-salesforce/",
+  "https://www.bles-software.com/use-cases/generative-ai-for-marketing-analytics-and-campaign-optimization-data-foundations-models-and-experimentation-playbooks/",
+  "https://www.bles-software.com/blog/innovative-product-led-saas-pricing-strategy-unveiled-advanced-tactics-for-2025/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-calendly-hubspot-salesforce-meeting-routing-ownership-and-attribution/",
+  "https://www.bles-software.com/services/machine-learning-development-company/",
+  "https://www.bles-software.com/revops-playbooks/salesforce-zendesk-integration-playbook-or-bles-software/",
+  "https://www.bles-software.com/dedicated-delivery-team/",
+  "https://www.bles-software.com/use-cases/ediscovery-and-ai-assisted-document-review-tar-cal-workflows-sampling-and-defensible-production-at-enterprise-scale/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-two-way-sync-de-duplication-and-error-handling-between-hubspot-and-salesforce/",
+  "https://www.bles-software.com/tools/legacy-system-modernization-planner/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-hubspot-salesforce-integration-field-mapping-lead-lifecycle-and-sync/",
+  "https://www.bles-software.com/blog/pega-infinity-agentic-ai-innovations-transforming-enterprise-app-development-from-concept-to-completion/"
+ ],
+ "jev": {
+  "pages": 24,
+  "decisions": 360,
+  "cost": 0.010597,
+  "input_tokens": 252321,
+  "model_seconds": 15.28,
+  "wall_seconds": 1.59
+ },
+ "frontier": {
+  "pages": 24,
+  "decisions": 360,
+  "cost": 2.943369,
+  "input_tokens": 229353,
+  "model_seconds": 298.32,
+  "wall_seconds": 49.37,
+  "errors": []
+ },
+ "agreement": {
+  "pages": 24,
+  "decisions": 360,
+  "agree": 0.8222,
+  "jev_yes": 75,
+  "frontier_yes": 115,
+  "both_yes": 63,
+  "jev_yes_confirmed": 0.84,
+  "frontier_yes_found": 0.5478,
+  "same_anchor_when_both_yes": 0.6984
+ }
+}

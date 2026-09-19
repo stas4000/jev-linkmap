@@ -1,0 +1,60 @@
+{
+ "mode": "block",
+ "rubric": 1,
+ "seed": 1,
+ "index": 0,
+ "pages": [
+  "https://www.bles-software.com/tools/agentic-payments-control-surface/",
+  "https://www.bles-software.com/revops-playbooks/reporting-across-hubspot-and-salesforce-pipeline-multi-touch-attribution-and-revenue-dashboards/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-hubspot-salesforce-field-mapping-and-object-model/",
+  "https://www.bles-software.com/revops-playbooks/hubspot-salesforce-integration-playbook-field-mapping-sync-rules-and-data-governance-0001/",
+  "https://www.bles-software.com/migration-playbooks/migration-to-aws-migration-playbook/",
+  "https://www.bles-software.com/use-cases/smm-lms-platform-%E2%80%93-best-practice-education-opportunity/",
+  "https://www.bles-software.com/revops-playbooks/sla-and-slos-for-revops-integrations-or-bles-software/",
+  "https://www.bles-software.com/use-cases/development-of-an-interactive-learning-platform-efiko-learning-platform/",
+  "https://www.bles-software.com/revops-playbooks/salesforce-campaigns-and-hubspot-marketing-events-reporting-utm-governance-and-multi-touch-attribution/",
+  "https://www.bles-software.com/migration-playbooks/azure-devops-to-github-enterprise-migration-playbook-repositories-pipelines-actions-boards-projects-and-security-at/",
+  "https://www.bles-software.com/tools/stalled-software-project-rescue-planner/",
+  "https://www.bles-software.com/blog/cisco-s-revolutionary-security-fusion-shaping-the-agentic-ai-era-for-app-developer-company-success/",
+  "https://www.bles-software.com/revops-playbooks/hubspot-stripe-integration-playbook-or-bles-software/",
+  "https://www.bles-software.com/use-cases/aora-ai-an-ai-powered-web-application-for-the-fashion-industry/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-hubspot-salesforce-campaign-sync-and-revenue-attribution/",
+  "https://www.bles-software.com/revops-playbooks/hubspot-slack-integration-playbook-or-bles-software/",
+  "https://www.bles-software.com/blog/digital-disruption-podcast-2025-dr-michael-littman-unpacks-ai-fears-facts-and-future/",
+  "https://www.bles-software.com/migration-playbooks/dynamics-ax-to-dynamics-365-finance-migration-playbook-data-upgrade-dual-write-governance-and-operational-continuity/",
+  "https://www.bles-software.com/revops-playbooks/hubspot-salesforce-integration-playbook-field-mapping-lifecycle-and-sync-strategy/",
+  "https://www.bles-software.com/tools/roi-calculator/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-lifecycle-stages-lead-status-and-field-mapping-between-hubspot-and-salesforce/",
+  "https://www.bles-software.com/use-cases/ai-powered-collision-detection-and-notification-system/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-governance-and-change-management-for-hubspot-salesforce-stacks/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-reporting-attribution-and-pipeline-governance-across-hubspot-and-salesforce/"
+ ],
+ "jev": {
+  "pages": 24,
+  "decisions": 360,
+  "cost": 0.008912,
+  "input_tokens": 212191,
+  "model_seconds": 15.11,
+  "wall_seconds": 1.09
+ },
+ "frontier": {
+  "pages": 24,
+  "decisions": 360,
+  "cost": 2.72548,
+  "input_tokens": 215425,
+  "model_seconds": 261.45,
+  "wall_seconds": 43.43,
+  "errors": []
+ },
+ "agreement": {
+  "pages": 24,
+  "decisions": 360,
+  "agree": 0.7583,
+  "jev_yes": 62,
+  "frontier_yes": 115,
+  "both_yes": 45,
+  "jev_yes_confirmed": 0.7258,
+  "frontier_yes_found": 0.3913,
+  "same_anchor_when_both_yes": 0.7556
+ }
+}

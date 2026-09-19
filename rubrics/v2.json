@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "author": "system 2 (claude-fable-5-1)",
+  "link_instructions": "Should the SOURCE page link to this TARGET? Yes when the source spends at least a sentence or passage on a specific subtopic named in the target's title (for example campaign sync, attribution, lifecycle stages, field mapping, error retries), even if the target is broader or also covers other topics. Judge each target on its own; do not score lower because many candidates look alike. No when the only overlap is the site-wide head topic, product names, the brand or a navigation label, when the target is about a different product, integration or audience, or when the link would exist only for SEO.",
+  "anchor_instructions": "Pick the phrase that best names this TARGET's distinguishing subject. Test: the phrase contains a subtopic word from the target's title (campaign, attribution, lifecycle, field mapping, retry), not only product names. When several phrases pass, choose the most specific complete one confidently; never answer none or hedge because several fit. Product names alone, or the site-wide head term, are acceptable only when the target is a general complete or master guide to that pairing. Pick none for navigation or brand labels, for truncated fragments that start a sentence or end mid-clause ('X is where Y', 'should create a'), and when no phrase carries a target subtopic word.",
+  "link_threshold": 0.65,
+  "anchor_confidence": 0.4,
+  "max_links_per_page": 3,
+  "examples": [
+    "A head term that would fit almost every candidate target equally (the product pairing plus 'integration') is not an anchor for a target about a specific subtopic; use it only for a general master guide.",
+    "A phrase cut from the start or middle of a sentence ('X is where Y', 'Z should create a') is a fragment, not an anchor; pick none unless a complete noun phrase is available.",
+    "When two or three phrases all name the target's subject, that is a reason to pick the most specific one with high confidence, not a reason to answer none.",
+    "If the source has a passage on attribution, lifecycle or another subtopic and the target's title names that subtopic, link even when the target also covers more.",
+    "A phrase that repeats the target's title words almost exactly is the best anchor; prefer it over phrases that only list the product names.",
+    "Navigation and brand labels such as a series name or company name never name a target's subject and are never anchors."
+  ]
+}

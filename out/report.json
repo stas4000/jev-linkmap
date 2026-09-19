@@ -1,0 +1,49 @@
+{
+ "mode": "race",
+ "rubric": 3,
+ "site_pages": 566,
+ "jev": {
+  "pages": 566,
+  "decisions": 8460,
+  "cost": 0.273116,
+  "input_tokens": 6502760,
+  "model_seconds": 180.43,
+  "wall_seconds": 5.95,
+  "workers": 32,
+  "links_placed": 679,
+  "pages_refused": 232,
+  "pages_linked": 334
+ },
+ "frontier": {
+  "pages": 8,
+  "decisions": 120,
+  "cost": 0.214971,
+  "input_tokens": 45897,
+  "model_seconds": 79.29,
+  "pages_by_the_clock": 0,
+  "cost_by_the_clock": 0,
+  "late_pages": 8,
+  "last_late_page_at": 16.55,
+  "wall_seconds": 5.95,
+  "workers": 8,
+  "links_placed": 11,
+  "errors": []
+ },
+ "agreement": {
+  "pages": 8,
+  "decisions": 120,
+  "agree": 0.8083,
+  "jev_yes": 3,
+  "frontier_yes": 26,
+  "both_yes": 3,
+  "jev_yes_confirmed": 1.0,
+  "frontier_yes_found": 0.1154,
+  "same_anchor_when_both_yes": 1.0
+ },
+ "per_page": {
+  "jev": 0.000483,
+  "frontier": 0.026871,
+  "times_cheaper": 55.7,
+  "frontier_full_pass_cost": 15.21
+ }
+}

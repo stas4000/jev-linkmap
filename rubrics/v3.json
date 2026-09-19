@@ -1,0 +1,17 @@
+{
+  "version": 3,
+  "author": "system 2 (claude-fable-5-1)",
+  "link_instructions": "Should the SOURCE link to this TARGET? Yes when the source spends a sentence or passage on the main subject named in the target's title (field mapping, troubleshooting, reverse ETL, vector databases, multi-touch attribution, cross-platform frameworks), even if the target frames it differently (cost, tools, comparison, another stack) or covers more. Yes for a general complete guide to a product pairing when the source is about that same pairing's integration. Judge each target alone; similar candidates do not lower the score. No when only product names, the brand or a navigation label overlap, when the target is a different project on the same products (source about migrating off a tool, target about integrating it), or a different product pair or audience.",
+  "anchor_instructions": "Pick the phrase that names this TARGET's subject. Step 1, drop fragments: any phrase containing a verb (is, wins, offers, defines, can, should, 'you sync', 'to build') or ending on a dangling word or a product name cut from a longer phrase ('sync between lifecycle', 'Field mapping is where most HubSpot', 'sandbox and a HubSpot'). Drop navigation and brand labels. Step 2: among the rest prefer the short complete noun phrase repeating the target's title words ('bidirectional sync', 'lifecycle stages', 'Salesforce Campaigns', 'troubleshooting approach for X sync'). Product-pair head terms ('HubSpot and Salesforce') fit only general complete or end-to-end guides; there, pick them confidently. If a clean phrase survives, choose it with high confidence; answer none only when nothing survives.",
+  "link_threshold": 0.65,
+  "anchor_confidence": 0.4,
+  "max_links_per_page": 3,
+  "examples": [
+    "A phrase with a verb in it or a dangling end ('X wins for Y', 'X is where most Y', 'sync between lifecycle', 'sandbox and a HubSpot') is a sentence fragment, never an anchor.",
+    "A short complete term that repeats the target's title words ('bidirectional sync', 'lifecycle stages', 'Salesforce Campaigns') beats a longer phrase that trails off into a product name.",
+    "When several clean noun phrases name the target's subject, pick the one closest to the title wording with high confidence; near-identical options are never a reason to answer none.",
+    "The product-pair head term is the correct anchor for a general complete or end-to-end guide to that pairing, and the wrong anchor for a target about one subtopic.",
+    "If the source has a section on a concept (reverse ETL, vector databases, multi-touch attribution) and the target's title leads with that concept, link even when the target frames it by cost, tools, comparison or a different stack.",
+    "Sharing product names is not a reason to link: a page about migrating off a tool does not link to guides about integrating that tool unless it discusses the target's specific subtopic, and series or brand labels are never anchors."
+  ]
+}

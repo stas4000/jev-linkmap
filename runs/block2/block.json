@@ -1,0 +1,60 @@
+{
+ "mode": "block",
+ "rubric": 2,
+ "seed": 1,
+ "index": 1,
+ "pages": [
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-deduplication-data-hygiene-and-identity-resolution-for-hubspot-salesforce/",
+  "https://www.bles-software.com/revops-playbooks/intercom-salesforce-integration-playbook-conversational-signals-for-pipeline-success-and-product-led-growth/",
+  "https://www.bles-software.com/use-cases/ai-conversation-intelligence-for-sales-teams-call-analysis-deal-coaching-and-pipeline-risk-signals/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-marketo-salesforce-integration-for-lead-lifecycle-and-attribution/",
+  "https://www.bles-software.com/costs-and-timelines/custom-software-development-cost-in-2025-estimates-you-can-defend-timelines-you-can-hit/",
+  "https://www.bles-software.com/migration-playbooks/hubspot-salesforce-migration-blueprint-or-bles-software/",
+  "https://www.bles-software.com/revops-playbooks/bidirectional-sync-strategies-for-hubspot-salesforce-ownership-duplicates-and-sales-handoffs/",
+  "https://www.bles-software.com/use-cases/deepcode-%E2%80%93-real-time-dark-web-breach-monitoring/",
+  "https://www.bles-software.com/revops-playbooks/two-way-sync-pitfalls-and-qa-preventing-data-loops-between-hubspot-and-salesforce/",
+  "https://www.bles-software.com/revops-playbooks/salesforce-slack-integration-playbook-or-bles-software/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-hubspot-salesforce-integration-field-mapping-lifecycle-and-bi-directional-sync/",
+  "https://www.bles-software.com/revops-playbooks/roi-calculator-lead-to-cash-lift-or-bles-software/",
+  "https://www.bles-software.com/services/desktop-application/",
+  "https://www.bles-software.com/revops-playbooks/field-mapping-and-sync-rules-for-hubspot-salesforce-prevent-duplicates-preserve-history/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-reporting-abm-and-multi-touch-attribution-in-a-hubspot-salesforce-stack/",
+  "https://www.bles-software.com/use-cases/human-resource-management-system-hrms/",
+  "https://www.bles-software.com/costs-and-timelines/mlops-implementation-cost-and-timeline-2025-model-serving-feature-stores-and-monitoring-at-enterprise-scale/",
+  "https://www.bles-software.com/services/ai-agents-for-business/",
+  "https://www.bles-software.com/revops-playbooks/hubspot-salesforce-integration-best-practices-the-revops-playbook/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-salesforce-snowflake-integration-and-reverse-etl-for-operational-analytics/",
+  "https://www.bles-software.com/migration-playbooks/intercom-zendesk-migration-guide-or-bles-software/",
+  "https://www.bles-software.com/costs-and-timelines/sla-impact-on-cost-uptime-spend-or-bles-software/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-hubspot-salesforce-sync-errors-and-troubleshooting-patterns/",
+  "https://www.bles-software.com/revops-playbooks/revops-playbook-reporting-kpis-and-change-management-for-hubspot-salesforce/"
+ ],
+ "jev": {
+  "pages": 24,
+  "decisions": 360,
+  "cost": 0.010372,
+  "input_tokens": 246943,
+  "model_seconds": 15.37,
+  "wall_seconds": 1.18
+ },
+ "frontier": {
+  "pages": 24,
+  "decisions": 360,
+  "cost": 2.911751,
+  "input_tokens": 216468,
+  "model_seconds": 317.87,
+  "wall_seconds": 56.95,
+  "errors": []
+ },
+ "agreement": {
+  "pages": 24,
+  "decisions": 360,
+  "agree": 0.8139,
+  "jev_yes": 102,
+  "frontier_yes": 133,
+  "both_yes": 84,
+  "jev_yes_confirmed": 0.8235,
+  "frontier_yes_found": 0.6316,
+  "same_anchor_when_both_yes": 0.7143
+ }
+}

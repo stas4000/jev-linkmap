@@ -1,0 +1,8 @@
+{
+ "from_version": 1,
+ "to_version": 2,
+ "model": "claude-fable-5-1",
+ "prompt_chars": 52824,
+ "cost": 0.7394100000000001,
+ "seconds": 65.0
+}

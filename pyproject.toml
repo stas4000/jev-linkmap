@@ -1,0 +1,17 @@
+[project]
+name = "jev-linkmap"
+version = "0.1.0"
+description = "Rebuild a site's internal link map with Jev (System 1), race a frontier model on the same queue, and let a deep model (System 2) rewrite the rubric from the disagreements."
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = []
+
+[project.scripts]
+jev-linkmap = "jev_linkmap.run:main"
+jev-linkmap-crawl = "jev_linkmap.crawl:main"
+jev-linkmap-system2 = "jev_linkmap.system2:main"
+jev-linkmap-report = "jev_linkmap.report:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
