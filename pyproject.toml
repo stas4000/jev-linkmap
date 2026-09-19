@@ -7,7 +7,9 @@ license = { text = "MIT" }
 dependencies = []
 
 [project.scripts]
-jev-linkmap = "jev_linkmap.run:main"
+jev-linkmap = "jev_linkmap.site:main"
+jev-linkmap-run = "jev_linkmap.run:main"
+jev-linkmap-verify = "jev_linkmap.verify:main"
 jev-linkmap-crawl = "jev_linkmap.crawl:main"
 jev-linkmap-system2 = "jev_linkmap.system2:main"
 jev-linkmap-report = "jev_linkmap.report:main"
