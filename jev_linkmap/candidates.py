@@ -70,27 +70,62 @@ class Index:
         inbound = Counter(k for p in pages for k in p["links_out_all"])
         # a page linked from most of the site is menu chrome, a contextual link to it adds nothing
         self.chrome = {k for k, c in inbound.items() if c >= 0.5 * n}
+        # The same rule one level down, for copy. A block that appears verbatim on a twentieth of the site
+        # is a template line, not this page's own words: a byline, a disclaimer, a CTA. It reads like copy
+        # in the served HTML, so an anchor gets offered from it, and the link then lands on every page at
+        # once or on none of them. Measured on www.bles-software.com 25 Sep 2026: the publisher byline
+        # added to 500+ CMS bodies on 18 Sep supplied 4 of 285 proposed anchors ("API integrations",
+        # "custom software"), and it is not in the source markdown at all, so none of them could be placed.
+        blocks = Counter(b for p in pages for b in set(p["blocks"]))
+        self.boilerplate = {b for b, c in blocks.items() if c >= max(3, 0.05 * n)}
         self.topic_terms = [self._topic_terms(p) for p in pages]
 
     def _topic_terms(self, p: dict) -> dict[str, float]:
         c = Counter(tokens(page_topic(p)))
         return {t: self.idf.get(t, 1.0) for t in c}
 
-    def similar(self, i: int, k: int) -> list[tuple[int, float]]:
+    def _cosine(self, i: int) -> list[tuple[int, float]]:
+        """Every other page by cosine similarity to page i, best first. Read from both ends: down the
+        column for the pages page i could link to, across the row for the pages that could link to it."""
         scores: dict[int, float] = {}
         for t, x in self.vecs[i].items():
             for j, y in self.postings[t]:
                 if j != i:
                     scores[j] = scores.get(j, 0.0) + x * y
+        return sorted(scores.items(), key=lambda kv: -kv[1])
+
+    def similar(self, i: int, k: int) -> list[tuple[int, float]]:
         src = self.pages[i]
         linked = set(src["links_out"])
-        ranked = sorted(scores.items(), key=lambda kv: -kv[1])
+        ranked = self._cosine(i)
         out = []
         for j, s in ranked:
             tgt = self.pages[j]
             if tgt["key"] in linked or tgt["key"] in self.chrome or tgt.get("lang") != src.get("lang"):
                 continue
             out.append((j, s))
+            if len(out) == k:
+                break
+        return out
+
+    def sources(self, j: int, k: int, allowed: set[int] | None = None) -> list[tuple[int, float]]:
+        """The mirror of similar(): the K pages most like page j that could link TO it and do not yet.
+
+        similar() asks what one page should link to, so a page that is nobody's nearest neighbour is never
+        anybody's candidate and ends with no inbound link at all. This side of the matrix starts from the
+        page that needs the link. `allowed` is the set of pages whose copy can actually carry a link.
+        """
+        tgt = self.pages[j]
+        out = []
+        for i, s in self._cosine(j):
+            src = self.pages[i]
+            # already linked from here, so a second link adds no discovery path; a page in another
+            # language never links across, the same rule similar() applies.
+            if tgt["key"] in src["links_out_all"] or src.get("lang") != tgt.get("lang"):
+                continue
+            if allowed is not None and i not in allowed:
+                continue
+            out.append((i, s))
             if len(out) == k:
                 break
         return out
@@ -104,6 +139,8 @@ class Index:
         found: dict[str, dict] = {}
         for b, block in enumerate(self.pages[i]["blocks"]):
             if b == 0 and block == self.pages[i].get("h1"):
+                continue
+            if block in self.boilerplate:
                 continue
             for sent in re.split(r"(?<=[\.\!\?])\s+", block):
                 shown = plain_copy(sent).strip()[:320]

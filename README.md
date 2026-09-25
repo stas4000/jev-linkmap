@@ -28,9 +28,9 @@ Per page Jev is about 240 times cheaper. Crawling (17.6 s, 8 polite workers) and
 ## How it works
 
 1. **Code reads the site.** `crawl.py` walks the sitemap and keeps title, headings, body copy without nav and footer, and the links each page already has. Standard library only.
-2. **Code does the search.** `candidates.py` picks the 15 most similar pages each page does not link to yet (TF-IDF cosine), and for each one the 2 to 6 word phrases **already in the copy** that could carry the link. Text that is already a link is never offered. Nothing is written, so every anchor is the author's own words.
+2. **Code does the search.** `candidates.py` picks the 15 most similar pages each page does not link to yet (TF-IDF cosine), and for each one the 2 to 6 word phrases **already in the copy** that could carry the link. Text that is already a link is never offered, and neither is a block of copy that appears verbatim across the site, because a byline or a disclaimer belongs to the template and not to the page. Nothing is written, so every anchor is the author's own words.
 3. **Jev does the judging.** One request per page carries the copy once and 30 questions: for each target a yes/no probability (should this page link there) and a multiple choice (which phrase is the honest anchor, or none). About half a second and $0.0005 a page.
-4. **Code places the links.** A link exists only when the link probability clears the threshold and the anchor choice is not "none" with enough confidence. At most 3 new links per page, best first, each phrase used once. A page where nothing clears the bar is left as it is, and that is a feature.
+4. **Code places the links.** A link exists only when the link probability clears the threshold and the anchor choice is not "none" with enough confidence. At most 3 new links per page per run, best first, each phrase used once. A page where nothing clears the bar is left as it is, and that is a feature.
 5. **The race.** Opus 5 pulls from the same queue with the same copy, targets, anchor options and rubric, through the `claude` CLI. The clock stops when Jev finishes. Calls in flight may land (marked late, never counted) so the chart shows when they did.
 
 ## Two ways to run it
@@ -92,6 +92,31 @@ The race on its own:
 ```bash
 python3 -m jev_linkmap.run race --rubric rubrics/v3.json     # Jev against the deep model, same queue, same clock
 ```
+
+## The pass nobody runs: inbound coverage
+
+`run map` asks every page what it should link TO. Nothing in that question covers a page as a target, so a
+page that is nobody's nearest neighbour is never anybody's candidate. Measured on the same site on
+25 Sep 2026, six days after the run above: 246 of its 571 URLs had no inbound internal link from any served
+page and were reachable only from sitemap.xml, and Google had admitted 1 of the 261 pages in the largest
+cohort. Same question, asked from the other side:
+
+```bash
+python3 -m jev_linkmap.inbound --scope scope.json --pages data/pages.jsonl --out out/inbound
+python3 -m jev_linkmap.verify --out out/inbound      # the same editor pass, on the same shape of result
+```
+
+The scope file is `{"targets": [urls that need a link], "sources": [urls whose copy may carry one]}`. For each
+target the code takes the 15 pages most similar to it that do not link to it yet, offers the phrases already
+in each of those pages' copy, and Jev answers the same two questions with the same trained rubric. The pairs
+are then grouped back per source page, so the cap of 3 new links per run and one link per phrase hold
+exactly as they do in the forward pass. The cap counts what a run places, never what the page already
+serves: merging a second run into a live map can leave a page with 4 or 5 links, and 12 pages on
+bles-software.com did on 25 Sep 2026.
+
+On the 190 pages in scope: 2,602 candidate pairs, 377 requests, 3.6 s, $0.11. Jev placed 351 links on 202
+source pages and left 2,251 pairs unlinked; the editor kept 126 of them. A page that no source page can
+honestly link to stays orphaned, and that is the correct answer, not a miss.
 
 ## Files
 

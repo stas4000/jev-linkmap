@@ -2,7 +2,7 @@ import json
 import unittest
 from unittest import mock
 
-from jev_linkmap import judge
+from jev_linkmap import inbound, judge
 from jev_linkmap.candidates import Index, build_queue
 from jev_linkmap.crawl import parse_page, plain_copy
 from jev_linkmap.run import agreement, link_map
@@ -53,11 +53,81 @@ class Candidates(unittest.TestCase):
                 self.assertNotIn("duplicate management", a["phrase"].lower())
         self.assertTrue(any("territory design" in a["phrase"].lower() for a in idx.anchors(0, 1)))
 
+    def test_a_template_line_on_many_pages_is_never_an_anchor(self):
+        # the byline the site injects into every body: it reads like copy and is nobody's own words
+        byline = "Published by Acme, a company that does territory design for lead routing everywhere."
+        pages = [parse_page(p["url"], f"<html lang='en'><head><title>{p['title']}</title></head><body><main>"
+                            f"<h1>{p['title']}</h1><p>{byline}</p><p>{p['blocks'][-1] if p['blocks'] else ''}</p></main></body></html>")
+                 for p in self.pages]
+        idx = Index(pages)
+        self.assertIn(byline, idx.boilerplate)
+        for a in idx.anchors(0, 1):
+            self.assertNotIn(a["sentence"], byline)
+
     def test_queue_skips_pages_already_linked(self):
         job = build_queue(self.pages, k=3, min_words=10)[0]
         keys = [t["key"] for t in job["targets"]]
         self.assertNotIn("acme.com/dedupe", keys)
         self.assertEqual(keys[0], "acme.com/territory")
+
+
+class Inbound(unittest.TestCase):
+    """The mirror pass: the page that needs the link picks the pages that could give it one."""
+
+    def setUp(self):
+        # /orphan is what /routing and /territory are about, and nothing links to it. /linker already does.
+        self.pages = [
+            parse_page("https://acme.com/routing/", HTML),
+            page("https://acme.com/territory/", "Territory design for lead routing", "Territory design decides who owns which account, and lead routing rules follow it. " * 12),
+            page("https://acme.com/orphan/", "Lead routing rules", "Lead routing rules decide which rep owns a new lead. " * 12),
+            page("https://acme.com/pasta/", "Cooking pasta at home", "Boil water, add salt, cook the pasta until it is ready to eat. " * 12),
+            parse_page("https://acme.com/linker/", "<html lang='en'><head><title>Routing notes</title></head><body><main><h1>Routing notes</h1>"
+                       "<p>Our <a href='/orphan'>lead routing rules</a> page covers every lead routing rule we run. " * 12 + "</p></main></body></html>"),
+        ]
+        self.idx = Index(self.pages)
+        self.orphan = 2
+
+    def test_candidate_sources_are_the_pages_that_could_link_here_and_do_not_yet(self):
+        keys = [self.pages[i]["key"] for i, _ in self.idx.sources(self.orphan, 4)]
+        self.assertIn("acme.com/routing", keys)
+        self.assertNotIn("acme.com/linker", keys)  # already links to the orphan: a second link adds no path
+        self.assertNotIn("acme.com/orphan", keys)  # never itself
+        self.assertLess(keys.index("acme.com/territory"), keys.index("acme.com/pasta") if "acme.com/pasta" in keys else 9)
+
+    def test_allowed_sources_are_the_only_pages_asked(self):
+        allowed = {1}
+        self.assertEqual([i for i, _ in self.idx.sources(self.orphan, 4, allowed)], [1])
+
+    def test_jobs_carry_the_orphan_as_a_target_with_anchors_from_the_source_copy(self):
+        jobs, stats = inbound.build_jobs(self.idx, self.pages, [self.orphan], None, 4, 5)
+        self.assertTrue(jobs)
+        self.assertEqual(stats["targets_without_a_candidate_source"], [])
+        for job in jobs:
+            copy = plain_copy(" ".join(self.pages[[p["key"] for p in self.pages].index(job["source"])]["blocks"]))
+            for target in job["targets"]:
+                self.assertEqual(target["url"], "https://acme.com/orphan/")
+                self.assertTrue(target["anchors"])
+                for anchor in target["anchors"]:
+                    self.assertIn(anchor["phrase"], copy)
+
+    def test_the_cap_holds_across_chunks_of_one_source_page(self):
+        a = lambda p: {"phrase": p, "sentence": f"We cover {p} here.", "block": 1, "score": 1}
+        job = {"source": "s", "url": "https://acme.com/s", "targets": [
+            {"id": f"t{n}", "key": f"k{n}", "url": f"https://acme.com/{n}", "title": f"T{n}", "about": "", "anchors": [a(f"phrase number {n}")]}
+            for n in range(1, 19)
+        ]}
+        sent = []
+
+        def answers(state, questions):
+            sent.append(len(state["targets"]))
+            return {q: ({"noul": 0.9} if q.endswith("_link") else {"choice": "a1", "confidence": 0.9}) for q in questions}, {"seconds": 0.4, "cost": 0.0005, "input_tokens": 7000}
+
+        with mock.patch("jev_linkmap.jev.ask", side_effect=answers):
+            res = inbound.judge_source(job, {"url": "u", "title": "S", "blocks": ["We cover phrase number 1 here."]}, RUBRIC)
+        self.assertEqual(sent, [15, 3])  # the request shape the rubric was scored on, never one oversized call
+        self.assertEqual(res["requests"], 2)
+        self.assertEqual(len(res["verdicts"]), 18)
+        self.assertEqual(len(res["links"]), RUBRIC["max_links_per_page"])  # 18 yes answers, still at most the cap
 
 
 class Judge(unittest.TestCase):
