@@ -118,6 +118,27 @@ On the 190 pages in scope: 2,602 candidate pairs, 377 requests, 3.6 s, $0.11. Je
 source pages and left 2,251 pairs unlinked; the editor kept 126 of them. A page that no source page can
 honestly link to stays orphaned, and that is the correct answer, not a miss.
 
+## On the live site: Ahrefs Site Audit
+
+[![Ahrefs Site Audit of bles-software.com, Health Score 100](docs/ahrefs-site-audit.png)](docs/ahrefs-site-audit.png)
+
+The links this repo places are live on www.bles-software.com. After the forward run and the inbound pass
+above, the live map held 339 links, every anchor a phrase already in its source page's copy. This is how an
+independent crawler reads the site afterwards, Ahrefs Site Audit, crawl of 14 Oct 2026:
+
+- **Health Score 100, Excellent.** The score is the share of internal URLs that have no errors. Its history
+  bars run from 19 Aug: near the floor in August, climbing through September, and at 100 on every crawl
+  since the end of September.
+- **1,332 URLs crawled**: 1,218 internal pages and 114 resources.
+- **21,809 links found**: 19,890 crawled, 1,866 not crawled yet, 53 blocked by robots.txt.
+- **2 URLs with errors out of 1,337.** 1,581 warnings and 601 notices are the rest of the 2,184 issues;
+  Ahrefs does not count those against the score.
+
+What it does and does not show: the Health Score measures technical errors, so it is not a ranking or a
+traffic number, and the site had other fixes in the same weeks. What it does show is that a few hundred links
+picked by a $0.0005 decision per page went onto a live site of about 1,200 pages and the crawler still finds almost nothing it
+counts as an error: 2 of 1,337 URLs carry one.
+
 ## Files
 
 - `out/report.html`: the race, the two ways to run it and the searchable link map in one page. `out/linkmap.csv`: every link Jev placed. `out/linkmap-verified.csv`: the ones the editor kept.
